@@ -1,6 +1,6 @@
 # Clip Assessment for Edna Hernandez
 
-This code will add, show, list and sum transactions. The purpose of this code is to proved an initial assessment for Edna Hernandez
+This code will add, show, list and sum transactions. The purpose of this code is to provide an initial assessment for Edna Hernandez.
 
 ## Getting Started
 
@@ -39,13 +39,13 @@ For showing a transaction, consider the transaction ID the one returned by the a
 ./application.sh <user_id> show <transaction_id>
 ```
 
-For listing all transaction that belong to an user:
+For listing all the transactions that belong to an user:
 
 ```
 ./application.sh <user_id> list
 ```
 
-For adding all the transaction ammounts that belong to an user:
+For adding up all the transaction amounts that belong to an user:
 
 ```
 ./application.sh <user_id> sum
