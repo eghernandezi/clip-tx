@@ -32,7 +32,7 @@ public class TxFileRepository implements TransactionRepository {
                 userTxs.add(tx);
                 transactions.put(tx.getUserId(), userTxs);
             }
-            mapper.writeValue(new File(getFileName()), transformMapToList(transactions));
+            mapper.writeValue(getFile(), transformMapToList(transactions));
         } catch (IOException e) {
             throw  new PersistenceException(e);
         }
@@ -66,7 +66,7 @@ public class TxFileRepository implements TransactionRepository {
     public List<TransactionFile> findTransactions() throws PersistenceException {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            return mapper.readValue(new File(getFileName()), new TypeReference<List<TransactionFile>>(){});
+            return mapper.readValue(getFile(), new TypeReference<List<TransactionFile>>(){});
         } catch(JsonMappingException me) {
             return new ArrayList<>();
         }catch (IOException e) {
@@ -89,7 +89,15 @@ public class TxFileRepository implements TransactionRepository {
         return txList;
     }
 
-    private String getFileName() {
+    private File getFile() throws IOException {
+        File txFile = new File(getFilePath());
+        if(!txFile.exists()) {
+            txFile.createNewFile();
+        }
+        return txFile;
+    }
+
+    private String getFilePath() {
         StringBuilder file = new StringBuilder();
         file.append(System.getProperty("user.dir"));
         file.append(File.separator);
